@@ -11,12 +11,9 @@ const buscaCategoria = async(id, req, res = response) => {
 
 const crearCategoria = async (req, res = response) => {
 
-    const { codigo, descripcion } = req.body;
+    const { body } = req;
 
-    const newCategoria = await Categoria.create({
-        codigo: codigo,
-        descripcion: descripcion
-    });
+    const newCategoria = await Categoria.create( body );
 
     // Devuelvo el json con la nueva categoría creada
     res.json(newCategoria);
@@ -75,7 +72,7 @@ const inactivarCategoria = async (req, res = response) => {
 const modificarCategoria = async (req, res = response) => {
 
     const { idParam } = req.params;
-    const { codigo, descripcion, activo } = req.body;
+    const { body } = req;
 
     const categoria = await buscaCategoria(idParam, req, res);
 
@@ -84,11 +81,7 @@ const modificarCategoria = async (req, res = response) => {
     };    
 
     // Modificamos los valores
-    categoria.set({
-        codigo: codigo,
-        descripcion: descripcion,
-        activo: activo
-    });
+    categoria.set( body );
 
     // Grabamos 
     await categoria.save();

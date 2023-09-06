@@ -11,20 +11,9 @@ const buscaCliente = async(id, req, res = response) => {
 
 const crearCliente = async (req, res = response) => {
 
-    const { nombre, apellidos, direccion, nif, cp, poblacion, provincia, movil, email, observaciones } = req.body;
+    const { body } = req;
 
-    const newCliente = await Cliente.create({
-        nombre: nombre,
-        apellidos: apellidos,
-        direccion: direccion,
-        nif: nif,
-        cp: cp,
-        poblacion: poblacion,
-        provincia: provincia,
-        movil: movil,
-        email: email,
-        observaciones: observaciones
-    });
+    const newCliente = await Cliente.create( body );
 
     // Devuelvo el json con el nuevo cliente creado
     res.json(newCliente);
@@ -55,7 +44,7 @@ const dameClientesPorId = async (req, res = response) => {
 const modificarCliente = async (req, res = response) => {
 
     const { idParam } = req.params;
-    const { nombre, apellidos, direccion, nif, cp, poblacion, provincia, movil, email, observaciones } = req.body;
+    const { body } = req;
 
     const cliente = await buscaCliente(idParam, req, res);
 
@@ -64,18 +53,7 @@ const modificarCliente = async (req, res = response) => {
     };    
 
     // Modificamos los valores
-    cliente.set({
-        nombre: nombre,
-        apellidos: apellidos,
-        direccion: direccion,
-        nif: nif,
-        cp: cp,
-        poblacion: poblacion,
-        provincia: provincia,
-        movil: movil,
-        email: email,
-        observaciones: observaciones
-    });
+    cliente.set( body );
     
     // Grabamos 
     await cliente.save();

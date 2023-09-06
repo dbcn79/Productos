@@ -11,11 +11,9 @@ const buscaMarca = async(id, req, res = response) => {
 
 const crearMarca = async (req, res = response) => {
 
-    const { descripcion } = req.body;
+    const { body } = req;
 
-    const newMarca = await Marca.create({
-        descripcion: descripcion
-    });
+    const newMarca = await Marca.create( body );
 
     // Devuelvo el json con la nueva marca creada
     res.json(newMarca);
@@ -74,7 +72,7 @@ const inactivarMarca = async (req, res = response) => {
 const modificarMarca = async (req, res = response) => {
 
     const { idParam } = req.params;
-    const { descripcion, activo } = req.body;
+    const { body } = req;
 
     const marca = await buscaMarca(idParam, req, res);
 
@@ -83,10 +81,7 @@ const modificarMarca = async (req, res = response) => {
     };    
 
     // Modificamos los valores
-    marca.set({
-        descripcion: descripcion,
-        activo: activo
-    });
+    marca.set( body );
 
     // Grabamos 
     await marca.save();
