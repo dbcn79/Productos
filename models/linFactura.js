@@ -1,7 +1,7 @@
-const { sequelize } = require('../database/connection');
+const { conexion }  = require('../database/connection');
 const { DataTypes } = require('sequelize');
 
-const LinFactura = sequelize.define('linFacturas', {
+const LinFactura = conexion.define('linFacturas', {
    id: {
         type: DataTypes.INTEGER.UNSIGNED,
         primaryKey: true,

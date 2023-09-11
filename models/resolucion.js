@@ -1,7 +1,7 @@
-const { sequelize } = require('../database/connection');
+const { conexion }  = require('../database/connection');
 const { DataTypes } = require('sequelize');
 
-const Resolucion = sequelize.define('resoluciones', {
+const Resolucion = conexion.define('resoluciones', {
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         primaryKey: true,

@@ -1,7 +1,7 @@
 const cors             = require('cors');
 const express          = require('express');
 const { createServer } = require('http');
-const { sequelize }    = require('../database/connection');
+const { conexion }     = require('../database/connection');
 const app              = express();
 
 class Server {
@@ -38,7 +38,7 @@ class Server {
 
     async conectarBD() {
         try {
-            await sequelize.authenticate()
+            await conexion.authenticate()
             console.log('Connection has been established successfully.')
         } catch (error) {
             console.log('Unable to connect to the database.', error);
